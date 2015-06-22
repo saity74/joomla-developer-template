@@ -1,0 +1,32 @@
+{
+  "name": "saity74/joomla-developer-template",
+  "version": "0.0.1",
+  "type": "template",
+  "description": "Joomla template with HAML support",
+  "keywords": ["HAML", "Joomla!"],
+  "homepage": "https://github.com/buyanov/blank_j3",
+  "license": "GPL 2 or Later",
+  "authors": [
+    {
+      "name": "Buyanov Danila",
+      "email": "info@saity74.ru"
+    },
+    {
+      "name": "Rogachov Sergey",
+      "email": "rs@saity74.ru"
+    }
+  ],
+  "repositories":[
+    {
+      "type": "git",
+      "url": "https://github.com/saity74/joomla-developer-template.git"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "mthaml/mthaml": "*"
+  }
+
+}
