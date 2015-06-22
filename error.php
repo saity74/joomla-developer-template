@@ -25,13 +25,15 @@ $user = JFactory::getUser();
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
 	<head>
-		<title><?php echo $this->title; ?></title>
+        <title><?php echo $this->error->getCode(); ?> - <?php echo htmlspecialchars($this->error->getMessage(), ENT_QUOTES, 'UTF-8'); ?></title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="language" content="<?php echo $this->language; ?>" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/public/css/styles.css" type="text/css" />
 	</head>
 	<body>
 		<div class="container">
+
+            <h1><?php echo $this->error->getMessage(); ?></h1>
 			<?php
 				$document = JFactory::getDocument();
 				if ($document->countModules( 'error404' )):

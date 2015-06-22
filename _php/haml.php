@@ -14,6 +14,9 @@ class JDocumentHAML extends JDocument
 
     protected $hamlExecutor;
 
+    /**
+     * @param array $options
+     */
     public function __construct($options = array())
     {
         parent::__construct($options);
@@ -107,7 +110,6 @@ class JDocumentHAML extends JDocument
             $this->hamlExecutor->display($this->_file, ['tpl' => $this]);
             $contents = ob_get_contents();
             ob_end_clean();
-
 
         } catch (MtHaml\Exception $e) {
             echo "Failed to execute template: ", $e->getMessage(), "\n";

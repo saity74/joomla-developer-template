@@ -24,8 +24,15 @@ class blank_j3{
         $activeMenu = $menu->getActive();
         //merge menu params with template params
         jimport( 'joomla.utilities.arrayhelper' );
-        $params = array_merge($activeMenu->params->toArray(), $this->_params->toArray());
-        $this->params = JArrayHelper::toObject($params, 'JRegistry');
+
+        if ($activeMenu !== null)
+        {
+            $params = array_merge($activeMenu->params->toArray(), $this->_params->toArray());
+            $this->params = JArrayHelper::toObject($params, 'JRegistry');
+        } else {
+            $this->params = $this->_params;
+        }
+
 
         // check for position
         $this->show_top = $template->countModules('top');
@@ -91,7 +98,7 @@ class blank_j3{
         $menu = JFactory::getApplication()->getMenu();
         $active_menu = $menu->getActive();
         $default_menu = $menu->getDefault();
-        $class = ($active_menu->id == $default_menu->id) ? 'frontpage' : 'not-frontpage';
+        $class = ($active_menu && $active_menu->id == $default_menu->id) ? 'frontpage' : 'not-frontpage';
         return $class;
     }
 }

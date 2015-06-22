@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{:name => 'description', :content => $tpl->getDescription()}
+    <!-- Latest compiled and minified CSS -->
+    %link{:rel => :stylesheet, :href => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'}
+  %body
+    %header
+      %div.container
+        %div.row
+          %div.top-left
+            = $tpl->renderModules('top-left')
+          %div.towns
+            = $tpl->renderModules('towns')
+    %main
+      %div.container
+        %div.row
+          - if($tpl->countModules('user1'))
+            %div.col-lg-12
+              = $tpl->renderModules('user1')
+          - if($tpl->countModules('left'))
+            %div.col-lg-4
+              = $tpl->renderModules('left', ['style' => 'menu'])
+            %div.col-lg-8
+              = $tpl->renderComponent()
+          - else
+            %div.col-lg-12
+              = $tpl->renderComponent()
+  %footer
+  %script{:src => '//code.jquery.com/jquery-1.11.3.min.js'}
+  %script{:src => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', :async => "async"}
