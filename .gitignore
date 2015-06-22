@@ -1,3 +1,22 @@
+<<<<<<< HEAD
 node_modules
 lib
 src/vendor
+=======
+*~
+~*
+*.orig
+*.bak
+*.swp
+# Файлы с машинным кодом
+*.pyc
+*.[ao]
+*.obj
+*.so
+*.la
+*.lib
+*.dll
+# Файлы IDE
+.idea/
+.DS_Store
+>>>>>>> 877131c4a823232da2e01025a0a49beaacb2ff23
