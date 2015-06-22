@@ -1,6 +1,6 @@
-Install template
+## Install template ##
 
-npm install
-bower install
-composer install
-gulp --dev
+1. npm install
+2. bower install
+3. composer install
+4. gulp --dev
