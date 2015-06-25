@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 node_modules
 lib
 src/vendor
 public/
-=======
 *~
 ~*
 *.orig
@@ -20,9 +18,7 @@ public/
 # Файлы IDE
 .idea/
 .DS_Store
->>>>>>> 877131c4a823232da2e01025a0a49beaacb2ff23
 /vendor/
-
 composer.lock
 .sass-cache
 .tmp
