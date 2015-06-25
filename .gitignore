@@ -24,3 +24,5 @@ public/
 /vendor/
 
 composer.lock
+.sass-cache
+.tmp
