@@ -1,0 +1,21 @@
+<!-- Joomla template head -->
+
+%meta{:charset => "utf-8"}
+%meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
+
+- if($base = $tpl->getBase())
+    %base{:href => $base}
+
+- foreach ($tpl->_metaTags as $type => $tag)
+    - foreach ($tag as $name => $content)
+        - if ($type == "http-equiv")
+            %meta{"http-equiv" => $name, :content => $content}
+        - elseif($type == "standard" && !empty($content))
+            %meta{:name => $name, :content => $content}
+
+- if ($documentDescription = $tpl->getDescription())
+    %meta{:name => "description", :content => $documentDescription}
+%link{:rel => "icon", :href => $base."favicon.ico", :type => "image/x-icon"}
+<!-- end Joomla! template head -->
+
+%link{:rel => :stylesheet, :href => 'templates/blank_j3/public/css/styles.css'}

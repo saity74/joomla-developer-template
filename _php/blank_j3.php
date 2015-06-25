@@ -10,9 +10,9 @@ class blank_j3{
     protected $_template;
     protected $_params;
 
-    public function __construct(JDocumentHTML $template)
+    public function __construct(JDocument $template)
     {
-        if (!$template instanceof JDocumentHTML)
+        if (!$template instanceof JDocument)
         {
             return false;
         }

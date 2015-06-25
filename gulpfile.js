@@ -19,6 +19,10 @@ var paths = {
     sprite: {
         src: basePaths.src + 'sprite/*.png'
     },
+    fonts: {
+        src: basePaths.src + 'fonts/**/*',
+        dest: basePaths.dest + 'fonts/'
+    },
     vendor: basePaths.src + 'vendor/'
 };
 
@@ -180,7 +184,14 @@ gulp.task('sprite', function() {
     spriteData.css.pipe(gulp.dest(paths.styles.src+"utils"));
 });
 
-gulp.task('watch', ['styles', 'scripts'], function() {
+// Fonts Copy
+
+gulp.task('fonts', function(){
+    gulp.src(paths.fonts.src)
+        .pipe(gulp.dest(paths.fonts.dest));
+});
+
+gulp.task('watch', ['styles', 'scripts', 'images', 'fonts'], function() {
     livereload.listen();
 
     gulp.watch(appFiles.styles, ['styles']).on('change', function(evt) {
@@ -196,6 +207,10 @@ gulp.task('watch', ['styles', 'scripts'], function() {
     });
 
     gulp.watch(paths.sprite.src, ['sprite']).on('change', function(evt) {
+        changeEvent(evt);
+    });
+
+    gulp.watch(paths.fonts.src, ['fonts']).on('add', function(evt) {
         changeEvent(evt);
     });
 });
@@ -219,5 +234,5 @@ gulp.task('ps-desktop', function (cb) {
 });
 
 gulp.task('default', [], function(cb) {
-    runSequence(['styles', 'scripts', 'images', 'sprite', 'watch'], cb);
+    runSequence(['styles', 'scripts', 'images', 'sprite', 'fonts', 'watch'], cb);
 });

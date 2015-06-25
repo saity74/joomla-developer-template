@@ -1,0 +1,51 @@
+:php
+    $lang	= JFactory::getLanguage();
+    $class = ' class="first"';
+
+- if (count($children[$category->id]) > 0 && $view->maxLevel != 0) : ?>
+    - foreach ($children[$category->id] as $id => $child) : ?>
+        - if ($this->params->get('show_empty_categories') || $child->numitems || count($child->getChildren())) :
+            - if (!isset($children[$category->id][$id + 1])) :
+                $class = ' class="last"';
+
+        %div{:class => $class}
+            :php
+                $class = ''
+            - if ($lang->isRTL())
+            %h3.page-header.item-title
+                - if ( $view->params->get('show_cat_num_articles', 1))
+                    %span.badge.badge-info.tip.hasTooltip{:title => JHtml::tooltipText('COM_CONTENT_NUM_ITEMS')}
+                        = $child->getNumItems(true)
+
+                %a{:href => JRoute::_(ContentHelperRoute::getCategoryRoute($child->id))}
+                    = $child->title
+
+                - if (count($child->getChildren()) > 0 && $this->maxLevel > 1)
+                    %a{:href =>"#category-".$child->id, :data-toggle => "collapse", :data-toggle => "button" :class => "btn btn-mini pull-right"}
+                        %span.icon-plus
+            - else
+            %h3.page-header.item-title
+                %a{:href => JRoute::_(ContentHelperRoute::getCategoryRoute($child->id))}
+                    = $child->title
+                - if ( $view->params->get('show_cat_num_articles', 1))
+                    %span.badge.badge-info.tip.hasTooltip{:title => JHtml::tooltipText('COM_CONTENT_NUM_ITEMS')}
+                        = $child->getNumItems(true)
+
+                - if (count($child->getChildren()) > 0 && $this->maxLevel > 1)
+                    %a{:href => "#category-".$child->id, :data-toggle => "collapse", :data-toggle => "button", :class="btn btn-mini pull-right"}
+                        %span.icon-plus
+
+            - if ($view->params->get('show_subcat_desc') == 1)
+                - if ($child->description)
+                    .category-desc
+                        = JHtml::_('content.prepare', $child->description, '', 'com_content.category')
+
+            - if (count($child->getChildren()) > 0 && $this->maxLevel > 1)
+                .collapse.fade{:id => "category-".$child->id}
+                :php
+                    $children[$child->id] = $child->getChildren();
+                    $category = $child;
+                    $view->maxLevel--;
+                    echo JHaml::display('children', compact($view, $category, $children);
+                    $view->category = $child->getParent();
+                    $view->maxLevel++;

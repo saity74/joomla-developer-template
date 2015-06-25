@@ -1,31 +1,106 @@
 !!!
 %html
-  %head
-    %meta{:name => 'description', :content => $tpl->getDescription()}
-    <!-- Latest compiled and minified CSS -->
-    %link{:rel => :stylesheet, :href => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'}
-  %body
-    %header
-      %div.container
-        %div.row
-          %div.top-left
-            = $tpl->renderModules('top-left')
-          %div.towns
-            = $tpl->renderModules('towns')
-    %main
-      %div.container
-        %div.row
-          - if($tpl->countModules('user1'))
-            %div.col-lg-12
-              = $tpl->renderModules('user1')
-          - if($tpl->countModules('left'))
-            %div.col-lg-4
-              = $tpl->renderModules('left', ['style' => 'menu'])
-            %div.col-lg-8
-              = $tpl->renderComponent()
-          - else
-            %div.col-lg-12
-              = $tpl->renderComponent()
-  %footer
-  %script{:src => '//code.jquery.com/jquery-1.11.3.min.js'}
-  %script{:src => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', :async => "async"}
+    %head
+        = JHaml::display('parts/head.haml', ['tpl' => $tpl], true)
+    %body
+        .site-wrapper
+            %header
+                .container
+                    .row
+                        .top-left.col-lg-3.col-md-3
+                            = $tpl->renderModules('top-left')
+                        .top-center.col-lg-9.col-md-9
+                            = $tpl->renderModules('top-center')
+            %main
+                .container
+                    .row
+                        - if($tpl->countModules('user1'))
+                            <!-- user1 template position -->
+                            .col-lg-12.col-md-12
+                                = $tpl->renderModules('user1')
+                            <!-- end user1 -->
+
+                        - if($tpl->countModules('user2'))
+                            <!-- user2 template position -->
+                            .col-lg-12.col-md-12
+                                = $tpl->renderModules('user2')
+                            <!-- end user2 -->
+
+                        - if($tpl->countModules('user3'))
+                            <!-- user3 template position -->
+                            .col-lg-12.col-md-12
+                                = $tpl->renderModules('user3')
+                            <!-- end user3 -->
+
+                        - if($tpl->countModules('left and not right'))
+                            <!-- left template position -->
+                            .left.sidebar.col-lg-3.col-md-3
+                                = $tpl->renderModules('left')
+                            <!-- end left -->
+
+                            <!-- component content -->
+                            .col-lg-9.col-md-9
+                                = $tpl->renderComponent()
+                            <!-- end content -->
+
+                        - elseif($tpl->countModules('right and not left'))
+                            <!-- component content -->
+                            .col-lg-9.col-md-9
+                                = $tpl->renderComponent()
+                            <!-- end content -->
+
+                            <!-- right template position -->
+                            .right.sidebar.col-lg-3.col-md-3
+                                = $tpl->renderModules('right')
+                            <!-- end right -->
+
+                        - elseif($tpl->countModules('left and right'))
+                            <!-- left template position -->
+                            .left.sidebar.col-lg-3.col-md-3
+                                = $tpl->renderModules('left')
+                            <!-- end left -->
+
+                            <!-- component content -->
+                            .col-lg-9.col-md-9
+                                .row
+                                    - if($tpl->countModules('message'))
+                                        .col-lg-12.col-md-12
+                                            = $tpl->renderModules('message')
+
+                                    .col-lg-8.col-md-8
+                                        - if ($tpl->countModules('content-header'))
+                                            .content-header
+                                                = $tpl->renderModules('content-header')
+                                        = $tpl->renderComponent()
+
+                                    <!-- right template position -->
+                                    .right.sidebar.col-lg-3.col-md-3
+                                        = $tpl->renderModules('right')
+                                    <!-- end right -->
+                            <!-- end content -->
+
+                        - else
+                            .col-lg-12.col-md-12
+                                = $tpl->renderComponent()
+
+            - if ($tpl->countModules('bottom'))
+                <!-- bottom template position -->
+                .container
+                    .bottom
+                        .row
+                            .col-lg-12.col-md-12
+                                .bottom-module-wrapper
+                                    = $tpl->renderModules('bottom')
+                <!-- end bottom -->
+
+            - if ($tpl->countModules('footer'))
+                <!-- footer template position -->
+                %footer
+                    .container
+                        .row
+                            .col-lg-12.col-md-12
+                                .footer-module-wrapper
+                                    = $tpl->renderModules('footer')
+                <!-- end footer -->
+
+        %script{:src => 'templates/blank_j3/public/js/app.js'}

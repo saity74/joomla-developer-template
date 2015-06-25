@@ -49,6 +49,11 @@ class JDocumentHAML extends JDocument
         }
     }
 
+    public function getHamlExecutor()
+    {
+        return $this->hamlExecutor;
+    }
+
     public function parse($params = array())
     {
         return $this->_fetchTemplate($params);
@@ -87,7 +92,6 @@ class JDocumentHAML extends JDocument
 
     public function render($caching = false, $params = array())
     {
-
         $this->_caching = $caching;
 
         if (empty($this->_template))
@@ -98,13 +102,11 @@ class JDocumentHAML extends JDocument
         $data = $this->_renderTemplate();
 
         parent::render();
-
         return $data;
     }
 
     protected function _renderTemplate()
     {
-
         try {
             ob_start();
             $this->hamlExecutor->display($this->_file, ['tpl' => $this]);
@@ -161,15 +163,12 @@ class JDocumentHAML extends JDocument
         if (!class_exists($class))
         {
             $path = __DIR__ . '/renderer/' . $this->_type . '/' . $type . '.php';
-
             if (file_exists($path))
             {
-
                 require_once $path;
             }
             else
             {
-
                 throw new RuntimeException('Unable to load renderer class', 500);
             }
         }
@@ -269,7 +268,6 @@ class JDocumentHAML extends JDocument
     public function setBuffer($content, $options = array())
     {
 
-
         // The following code is just for backward compatibility.
         if (func_num_args() > 1 && !is_array($options))
         {
@@ -284,6 +282,5 @@ class JDocumentHAML extends JDocument
 
         return $this;
     }
-
 
 }

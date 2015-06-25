@@ -1,0 +1,78 @@
+:php
+    $lead_items     = $view->get('lead_items');
+    $link_items     = $view->get('link_items');
+    $intro_items    = $view->get('intro_items');
+    $columns        = $view->get('columns');
+    $category       = $view->get('category');
+    $children       = $view->get('children');
+    $pagination     = $view->get('pagination');
+
+.blog{:class => $view->pageclass_sfx, :itemscope => '',  :itemtype => "http://schema.org/Blog"}
+    - if ($view->params->get('show_page_heading'))
+        .page-header
+            %h1
+                = $view->params->get('page_heading')
+
+    - if ($view->params->get('show_category_title', 1) or $view->params->get('page_subheading'))
+        %h2
+            = $view->params->get('page_subheading')
+            - if ($view->params->get('show_category_title'))
+                %span.subheading-category
+                    = $category->title
+
+
+    - if ($view->params->get('show_cat_tags', 1) && !empty($view->category->tags->itemTags))
+        :php
+            $view->category->tagLayout = new JLayoutFile('joomla.content.tags')
+        = $view->category->tagLayout->render($view->category->tags->itemTags)
+
+    - if ($view->params->get('show_description', 1) || $view->params->def('show_description_image', 1))
+        .category-desc.clearfix
+            - if ($view->params->get('show_description_image') && $view->category->getParams()->get('image'))
+                %img{:src => $view->category->getParams()->get('image'), :alt => $view->category->getParams()->get('image_alt')}
+
+            - if ($view->params->get('show_description') && $category->description)
+                = JHtml::_('content.prepare', $category->description, '', 'com_content.category')
+
+    - if (empty($lead_items) && empty($link_items) && empty($intro_items))
+        - if ($view->params->get('show_no_articles', 1))
+            %p
+                = JText::_('COM_CONTENT_NO_ARTICLES')
+
+    - if (!empty($lead_items))
+        .items-leading.clearfix
+            - foreach ($lead_items as $key => $item)
+                %div{:class => "leading-".$key.($item->state == 0 ? ' system-unpublished' : null), :itemprop => "blogPost", :itemscope => "" , :itemtype => "http://schema.org/BlogPosting"}
+                    = JHaml::display('item', ['item' => $item])
+
+    :php
+        $intro_items_matrix = [];
+        if (!empty($intro_items) && ($columns > 1))
+        {
+            $intro_items_matrix = array_chunk($intro_items, $columns);
+        }
+
+    - if ($intro_items_matrix)
+        - foreach($intro_items_matrix as $rowN => $row)
+            %div{:class => "items-row row-fluid clearfix row-".$rowN}
+                - foreach($row as $colN => $item)
+                    %div{:class => "item col-lg-".(round(12 / $columns))." column-".$colN.($item->state == 0 ? ' system-unpublished' : null), :itemprop => "blogPost", :itemscope => "", :itemtype => "http://schema.org/BlogPosting"}
+                        = JHaml::display('item', ['item' => $item])
+
+    - if (!empty($link_items))
+        .items-more
+            = JHaml::display('links', ['link_items' => $link_items]);
+
+    - if (!empty($children[$category->id]) && $view->maxLevel != 0)
+        .cat-children
+            - if ($view->params->get('show_category_heading_title_text', 1) == 1)
+                %h3
+                    = JTEXT::_('JGLOBAL_SUBCATEGORIES')
+                = JHaml::display('children', compact($view, $children, $category))
+
+    - if (($view->params->def('show_pagination', 1) == 1 || ($view->params->get('show_pagination') == 2)) && ($pagination->get('pages.total') > 1))
+        .pagination
+            - if ($view->params->def('show_pagination_results', 1))
+                %p.counter.pull-right
+                    = $pagination->getPagesCounter()
+                = $pagination->getPagesLinks()

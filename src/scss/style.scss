@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "bootstrap/_responsiveoff";
+// @import "bootstrap/_responsiveoff";
 @import "bootstrap/_bootstrap";
 
 @import "utils/_mixins";
@@ -11,10 +11,16 @@
 @import "base/_vars";
 @import "base/_base";
 @import "base/_typo";
+@import "base/_icons";
+
 
 @import "layout/_header";
+@import "layout/_content";
 @import "layout/_footer";
 @import "layout/_sidebar";
+@import "layout/_wrapper";
+@import "layout/_pagination";
+
 
 @import "modules/_breadcrumbs";
 @import "modules/_modal";

@@ -1,8 +1,18 @@
 @charset "UTF-8";
 
-$em-base: 16px !default;
+$em-base: 14px !default;
+$activeColor: #2196f3;
+
+$footerColor: #dce0e4;
 
 $color-stack:
+    (group: link, id: normal, color: #666),
+    (group: link, id: hover, color: $activeColor),
+
+    (group: text, id: dark, color: #333333),
+    (group: text, id: normal, color: #666666),
+    (group: text, id: light, color: #888888),
+
     (group: base, id: normal, color: #fff),
     (group: base, id: hover, color: #efefef);
 

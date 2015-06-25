@@ -1,1 +1,55 @@
 @charset "UTF-8";
+.sidebar{
+    .menu{
+        padding-left: 30px;
+        > li{
+            list-style: none;
+            margin-bottom: 20px;
+            &.active {
+                > a {
+                    color: color('link', 'hover');
+                    &:hover {
+                        color: color('link', 'hover', 0.9);
+                    }
+                }
+            }
+            > .nav-child{
+                padding-left: 10px;
+                margin: 0.5em 0;
+                > li {
+                    list-style: none;
+                    &:before {
+                        content: "-";
+                        margin-right: 5px;
+                    }
+                    > a {
+                        text-decoration: none;
+                        color: color('link');
+                        &:hover {
+                            color: color('link', 'hover');
+                        }
+                    }
+                    &.active {
+                        > a {
+                            color: color('link', 'hover');
+                            &:hover {
+                                color: color('link', 'hover', 0.9);
+                            }
+                        }
+                    }
+                }
+            }
+
+            > a{
+                text-decoration: none;
+                color: color('link');
+
+                &:hover{
+                    color: color('link', 'hover');
+                }
+            }
+        }
+    }
+
+
+}
