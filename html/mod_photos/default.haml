@@ -1,0 +1,69 @@
+:php
+    $sort = $params->get('sort', 0);
+    $doc = JFactory::getDocument();
+
+    $photos = modPhotosHelper::getPhotos($params->get('path'), $params->get('width'), $params->get('height'));
+
+
+    switch ($sort){
+        case 1 : $photos = array_reverse($photos);
+    }
+
+    $main_photo_index = $params->get('main_photo', 1) - 1;
+    if ($params->get('gallery_type', 0) == 1 && isset($photos[$main_photo_index]))
+    {
+        $main_photo = basename($photos[$main_photo_index]);
+        $main_photo_img = str_replace('-mid.jpg', '-min.jpg', $main_photo);
+        unset($photos[$main_photo_index]);
+    }
+
+.photos.gallery{:itemscope => "", :itemtype => "http://schema.org/ImageGallery"}
+    - if (!$params->get('gallery_type', 0))
+        - foreach ($photos as $key => $photo)
+            :php
+                $base = JUri::root();
+                $image = new stdClass();
+                // set images paths
+                $image->orig->abs_path = str_replace('-mid.jpg', '.jpg', $photo);
+                $image->orig->rel_path = $base.'images/'.$params->get('path').'/'.basename($image->orig->abs_path);
+
+                $image->mid->abs_path = $photo;
+                $image->mid->rel_path = $base.'images/'.$params->get('path').'/'.basename($image->mid->abs_path);
+
+                $image->min->abs_path = str_replace('-mid.jpg', '-min.jpg', $photo);
+                $image->min->rel_path = $base.'images/'.$params->get('path').'/min/'.basename($image->min->abs_path);
+
+                // set images dimentions
+                list($orig_width, $orig_height, $orig_type, $orig_attr) = getimagesize($image->orig->abs_path);
+                $image->orig->width = $orig_width;
+                $image->orig->height = $orig_height;
+
+                list($mid_width, $mid_height, $mid_type, $mid_attr) = getimagesize($image->mid->abs_path);
+                $image->mid->width = $mid_width;
+                $image->mid->height = $mid_height;
+
+                // set image title
+                $image->title = $params->get('title_'.($key+1));
+
+            %figure{:itemprop => "associatedMedia", :itemscope => "", :itemtype => "http://schema.org/ImageObject"}
+                %a.thumb{   :itemprop => "contentUrl",
+                            :title => $image->title,
+                            :href => $image->orig->rel_path,
+                            "data-med" => $image->mid->rel_path,
+                            "data-size" => $image->orig->width.'x'.$image->orig->height,
+                            "data-med-size" => $image->mid->width.'x'.$image->mid->height}
+                    %img{:itemprop => "thumbnail", :src => $image->min->rel_path}
+                    %figcaption{:itemprop => "caption description"}
+                        = $image->title
+    - else
+        .main-photo
+            %a.thumb{:rel => "lightbox-gallery", :title => $params->get('title_'.($main_photo_index+1)), :href => $photo_relative_path.$main_photo}
+                %img{:src => $photo_relative_path_min.$main_photo_img}
+            .photos-invisible
+                - foreach ($photos as $key => $photo)
+                    - $image_name = basename($photo)
+                    %a{:rel => "lightbox-gallery", :title => $params->get('title_'.($key+1)), :href => $photo_relative_path.$image_name}
+
+            - if ($header = $params->get('header', ''))
+                %span.main-photo-title
+                    $header

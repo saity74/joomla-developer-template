@@ -1,0 +1,41 @@
+:php
+    $photos = modPhotosHelper::getPhotos($params->get('path'), $params->get('width'), $params->get('height'));
+
+
+.photos.gallery.slick{:itemscope => "", :itemtype => "http://schema.org/ImageGallery"}
+    - foreach ($photos as $key => $photo)
+        :php
+            $base = JUri::root();
+            $image = new stdClass();
+            // set images paths
+            $image->orig->abs_path = str_replace('-mid.jpg', '.jpg', $photo);
+            $image->orig->rel_path = $base.'images/'.$params->get('path').'/'.basename($image->orig->abs_path);
+
+            $image->mid->abs_path = $photo;
+            $image->mid->rel_path = $base.'images/'.$params->get('path').'/'.basename($image->mid->abs_path);
+
+            $image->min->abs_path = str_replace('-mid.jpg', '-min.jpg', $photo);
+            $image->min->rel_path = $base.'images/'.$params->get('path').'/min/'.basename($image->min->abs_path);
+
+            // set images dimentions
+            list($orig_width, $orig_height, $orig_type, $orig_attr) = getimagesize($image->orig->abs_path);
+            $image->orig->width = $orig_width;
+            $image->orig->height = $orig_height;
+
+            list($mid_width, $mid_height, $mid_type, $mid_attr) = getimagesize($image->mid->abs_path);
+            $image->mid->width = $mid_width;
+            $image->mid->height = $mid_height;
+
+            // set image title
+            $image->title = $params->get('title_'.($key+1));
+
+        %figure{:itemprop => "associatedMedia", :itemscope => "", :itemtype => "http://schema.org/ImageObject"}
+            %a.thumb{   :itemprop => "contentUrl",
+                        :title => $image->title,
+                        :href => $image->orig->rel_path,
+                        "data-med" => $image->mid->rel_path,
+                        "data-size" => $image->orig->width.'x'.$image->orig->height,
+                        "data-med-size" => $image->mid->width.'x'.$image->mid->height}
+                %img{:itemprop => "thumbnail", :src => $image->min->rel_path}
+                %figcaption{:itemprop => "caption description"}
+                    = $image->title
