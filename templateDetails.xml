@@ -11,6 +11,7 @@
     <version>1.0.0</version>
     <description>TMPL_JOOMLA3_DESC</description>
     <files>
+        <filename>.gitignore</filename>
         <filename>.bowerrc</filename>
         <filename>bower.json</filename>
         <filename>composer.json</filename>
