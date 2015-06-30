@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.pagination{
+    > ul{
+        overflow: hidden;
+        > li{
+            float: left;
+            list-style: none;
+            padding: 0 5px;
+        }
+    }
+}

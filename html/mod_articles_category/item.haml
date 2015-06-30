@@ -1,0 +1,44 @@
+%h3
+    - if ($params->get('link_titles') == 1)
+        %a{:class => "mod-articles-category-title".$item->active, :href => $item->link}
+            = $item->title
+    - else
+        = $item->title
+
+- if ($item->displayHits)
+    %span.mod-articles-category-hits
+        = $item->displayHits
+
+- if ($params->get('show_author'))
+    %span.mod-articles-category-writtenby
+        = $item->displayAuthorName
+
+- if ($item->displayCategoryTitle)
+    %span.mod-articles-category-category
+        = $item->displayCategoryTitle
+
+- if ($params->get('show_introtext'))
+    %p.mod-articles-category-introtext
+        = $item->displayIntrotext
+
+- if ($params->get('show_readmore'))
+    %p.mod-articles-category-readmore
+        %a{:class => "mod-articles-category-title".$item->active, :href => $item->link}
+            - if ($item->params->get('access-view') == false)
+                = JText::_('MOD_ARTICLES_CATEGORY_REGISTER_TO_READ_MORE');
+            - elseif ($readmore = $item->alternative_readmore)
+                = $readmore
+                = JHtml::_('string.truncate', $item->title, $params->get('readmore_limit'))
+                - if ($params->get('show_readmore_title', 0) != 0)
+                    = JHtml::_('string.truncate', ($this->item->title), $params->get('readmore_limit'))
+            - elseif ($params->get('show_readmore_title', 0) == 0)
+                = JText::sprintf('MOD_ARTICLES_CATEGORY_READ_MORE_TITLE')
+            - else
+                = JText::_('MOD_ARTICLES_CATEGORY_READ_MORE')
+                = JHtml::_('string.truncate', ($item->title), $params->get('readmore_limit'))
+
+- if ($item->displayDate)
+    %span.mod-articles-category-date
+        %span.flaticon-calendar
+        %time{:datetime => JHtml::_('date', $item->displayDate, JText::_('DATE_FORMAT_LC3')), :itemprop => "datePublished"}
+            = JHtml::_('date', $item->displayDate, JText::_('DATE_FORMAT_LC3'))

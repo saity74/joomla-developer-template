@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+footer{
+  background: $footerColor;
+  padding: 35px 0;
+  color: #888;
+  font-size: 0.9rem;
+
+  .footer-module-wrapper{
+    padding: 0 30px;
+  }
+
+  h2{
+    font-weight: normal;
+  }
+}

@@ -1,0 +1,5 @@
+%ol.nav.nav-tabs.nav-stacked
+    - foreach ($link_items as $item)
+        %li
+            %a{:href => JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language))}
+                = $item->title

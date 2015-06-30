@@ -1,0 +1,47 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700&subset=latin,cyrillic);
+
+html {
+    height: 100%;
+    font-size: 14px;
+}
+
+body {
+    font-family: 'Open Sans', tahoma, arial, verdana, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    min-height: 100%;
+    background: #eee9db url(../img/bg.png) repeat 0 0;
+    border-top: 4px solid $activeColor;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:focus {
+        text-decoration: underline;
+        outline: none;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+p {
+    line-height: normal;
+    margin: 0 0 10px 0;
+}
+
+.tab-pane {
+    position: absolute;
+    left: -99999px;
+    opacity: 0;
+
+    &.active {
+        position: static;
+        display: block;
+        opacity: 1;
+    }
+}

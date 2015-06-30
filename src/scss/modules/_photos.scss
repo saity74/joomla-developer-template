@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.gallery {
+    width: 100%;
+    float: left;
+}
+.gallery img {
+    width: 100%;
+    height: auto;
+}
+.gallery figure {
+    display: block;
+    float: left;
+    border: 1px solid color(text, light, 0.5);
+    padding: 3px;
+    margin: 0 6px 15px 6px;
+
+    @media (min-width: $screen-sm-min) {
+        margin: 0 6px 15px 6px;
+    }
+    @media (min-width: $screen-md-min) {
+        margin: 0 5px 15px 5px;
+        width: 140px;
+    }
+    @media (min-width: $screen-lg-min) {
+        margin: 0 8px 15px 8px;
+        width: 168px;
+    }
+}
+.gallery figcaption {
+    display: none;
+}

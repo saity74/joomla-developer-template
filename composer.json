@@ -1,0 +1,29 @@
+{
+    "config": {
+      "vendor-dir": "lib/vendor"
+    },
+
+    "name": "saity74/joomla-developer-template",
+    "description": "Joomla template with HAML support",
+    "type": "template",
+    "require": {
+        "mthaml/mthaml": "^1.7"
+    },
+    "license": "GPL 2 or Later",
+    "authors": [
+        {
+            "name": "Buyanov Danila",
+            "email": "info@saity74.ru"
+        },
+        {
+          "name": "Rogachov Sergey",
+          "email": "rs@saity74.ru"
+        }
+    ],
+    "repositories":[
+      {
+        "type": "git",
+        "url": "https://github.com/saity74/joomla-developer-template.git"
+      }
+    ]
+}

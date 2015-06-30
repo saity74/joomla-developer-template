@@ -1,0 +1,16 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "jquery-form-validator": "",
+    "lazysizes": "",
+    "photoswipe": "~4.0.8",
+    "slick.js": "~1.5.5",
+    "bootstrap": "~3.3.5"
+  }
+}

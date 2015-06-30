@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.site-wrapper{
+    margin: 0 auto;
+    background: #fff;
+    overflow: hidden;
+
+    @media (min-width: $screen-sm-min) {
+        width: $container-sm;
+    }
+    @media (min-width: $screen-md-min) {
+        width: $container-md;
+    }
+    @media (min-width: $screen-lg-min) {
+        width: $container-lg;
+    }
+}

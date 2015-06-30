@@ -8,12 +8,15 @@
             $base = JUri::root();
             $image = new stdClass();
             // set images paths
+            $image->orig = new stdClass();
             $image->orig->abs_path = str_replace('-mid.jpg', '.jpg', $photo);
             $image->orig->rel_path = $base.'images/'.$params->get('path').'/'.basename($image->orig->abs_path);
 
+            $image->mid = new stdClass();
             $image->mid->abs_path = $photo;
             $image->mid->rel_path = $base.'images/'.$params->get('path').'/'.basename($image->mid->abs_path);
 
+            $image->min = new stdClass();
             $image->min->abs_path = str_replace('-mid.jpg', '-min.jpg', $photo);
             $image->min->rel_path = $base.'images/'.$params->get('path').'/min/'.basename($image->min->abs_path);
 

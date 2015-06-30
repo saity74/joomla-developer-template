@@ -1,0 +1,33 @@
+{
+  "name": "Site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "author": "Sergey Rogachev",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-changed": "*",
+    "gulp-combine-media-queries": "*",
+    "gulp-concat": "*",
+    "gulp-csso": "*",
+    "gulp-if": "*",
+    "gulp-imagemin": "*",
+    "gulp-jshint": "*",
+    "gulp-load-plugins": "*",
+    "gulp-notify": "*",
+    "gulp-rename": "*",
+    "gulp-ruby-sass": "*",
+    "gulp-size": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "gulp.spritesmith": "*",
+    "jshint-stylish": "*",
+    "run-sequence": "*",
+    "gulp-livereload": "*"
+  },
+  "dependencies": {
+    "psi": "*"
+  }
+}

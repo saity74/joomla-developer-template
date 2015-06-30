@@ -1,0 +1,87 @@
+@charset "UTF-8";
+.sidebar{
+    .menu{
+        padding-left: 30px;
+        > li {
+            list-style: none;
+            margin-bottom: 20px;
+            &.active {
+                > a {
+                    color: color('link', 'hover');
+                    &:hover {
+                        color: color('link', 'hover', 0.9);
+                    }
+                }
+            }
+            > .nav-child {
+                padding-left: 10px;
+                margin: 0.5em 0;
+                > li {
+                    list-style: none;
+                    &:before {
+                        content: "-";
+                        margin-right: 5px;
+                    }
+                    > a {
+                        text-decoration: none;
+                        color: color('link');
+                        &:hover {
+                            color: color('link', 'hover');
+                        }
+                    }
+                    &.active {
+                        > a {
+                            color: color('link', 'hover');
+                            &:hover {
+                                color: color('link', 'hover', 0.9);
+                            }
+                        }
+                    }
+                }
+            }
+
+            > a {
+                text-decoration: none;
+                color: color('link');
+
+                &:hover {
+                    color: color('link', 'hover');
+                }
+            }
+        }
+    }
+
+    .navbar-toggle{
+        background-color: #ddd !important;
+        border: 1px solid #ddd !important;
+
+        > .icon-bar{
+            background-color: color(text) !important;
+        }
+    }
+
+    .category-module{
+        > li{
+            list-style: none;
+
+            > p{
+                font-size: rem(13);
+            }
+
+            > .mod-articles-category-date{
+                font-size: rem(12);
+            }
+        }
+    }
+
+    .module-header{
+        > h4{
+            margin-top: 20px;
+            color: color(text);
+            box-shadow: inset 0 -3px 0px #e4e4e4;
+            padding-bottom: 15px;
+            line-height: 26px
+        }
+    }
+
+}
