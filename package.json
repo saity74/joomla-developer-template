@@ -29,5 +29,8 @@
   },
   "dependencies": {
     "psi": "*"
+  },
+  "scripts" :{
+    "postinstall" : "composer install && bower install"
   }
 }
