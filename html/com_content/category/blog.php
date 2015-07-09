@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 
-if ($content = JHaml::_($this)) return $content;
+if (class_exists("JHaml") && $content = JHaml::_($this)) return $content;
 
 JHtml::_('behavior.caption');
 ?>
