@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Joomla.Site
- * @subpackage  Template.blank_j3
+ * @subpackage  Template.Blank_J3
  *
  * @copyright   Copyright (C) 2005 - 2016 Saity74, LLC. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -17,7 +17,7 @@ require_once __DIR__ . '/renderer/foot_j3.php';
  *
  * @since  1.0
  */
-class Blank_j3
+class Blank_J3
 {
 	/**
 	 * @var   array  Template params
