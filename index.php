@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Joomla.Site
- * @subpackage  Template.blank_j3
+ * @subpackage  Template.Blank_J3
  *
  * @copyright   Copyright (C) 2005 - 2016 Saity74, LLC. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -17,7 +17,7 @@ $app = JFactory::getApplication();
 $doc = JFactory::getDocument();
 
 $params = $this->params;
-$tmpl = new Blank_j3($this);
+$tmpl = new Blank_J3($this);
 
 $assets = $tmpl->get_assets();
 
